@@ -42,7 +42,7 @@ export async function PATCH(request: NextRequest) {
 
     // Fetch admin's current password hash from DB
     const admin = await db
-      .select({ id: users.id, password: users.password })
+      .select({ id: users.id, password: users.passwordHash })
       .from(users)
       .where(eq(users.id, session.id))
       .get();
@@ -73,7 +73,7 @@ export async function PATCH(request: NextRequest) {
     const hashed = await hashPassword(newPassword);
     await db
       .update(users)
-      .set({ password: hashed })
+      .set({ passwordHash: hashed })
       .where(eq(users.id, admin.id))
       .run();
 
