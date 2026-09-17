@@ -55,7 +55,7 @@ export default async function SchemePage({ params }: SchemePageProps) {
               />
               <SchemeDownloadButton
                 schemeName={scheme.title}
-                pdfUrl={scheme.pdfUrl}
+                pdfUrl={scheme.pdfGuideline}
               />
             </div>
           </div>

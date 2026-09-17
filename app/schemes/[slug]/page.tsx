@@ -1,4 +1,5 @@
-import { notFound, cookies } from 'next/server';
+import { notFound } from 'next/navigation';
+import { cookies } from 'next/headers';
 import { ArrowLeft, ExternalLink, Shield, CheckCircle2, FileText, AlertCircle, Download, Phone } from 'lucide-react';
 import Link from 'next/link';
 import { db } from '@/lib/db';
@@ -106,7 +107,7 @@ export default async function SchemePage({ params }: SchemePageProps) {
               ministry={scheme.ministry}
               title={scheme.title}
               description={scheme.description}
-              imageUrl={scheme.imageUrl}
+              imageUrl={scheme.imageUrl || undefined}
             />
           </div>
 
@@ -243,7 +244,7 @@ export default async function SchemePage({ params }: SchemePageProps) {
             ministry={scheme.ministry}
             title={scheme.title}
             description={scheme.description}
-            imageUrl={scheme.imageUrl}
+            imageUrl={scheme.imageUrl || undefined}
           />
         </div>
 

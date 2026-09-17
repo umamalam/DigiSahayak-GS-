@@ -55,7 +55,7 @@ export async function GET(
       return NextResponse.json({ error: 'Application not found' }, { status: 404 });
     }
 
-    let documents = [];
+    let documents: (typeof userDocuments.$inferSelect)[] = [];
     if (application.attachedDocuments) {
       try {
         const docIds = JSON.parse(application.attachedDocuments);

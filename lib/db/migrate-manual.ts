@@ -193,7 +193,7 @@ try {
   const apps = db.prepare('SELECT id FROM user_applications WHERE application_number IS NULL').all();
   const updateStmt = db.prepare('UPDATE user_applications SET application_number = ?, status = ? WHERE id = ?');
   
-  for (const app of apps) {
+  for (const app of apps as { id: number }[]) {
     const timestamp = Date.now();
     const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
     const appNumber = `APP${timestamp}${random}`;

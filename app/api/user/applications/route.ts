@@ -2,6 +2,12 @@ import { db } from '@/lib/db';
 import { userApplications, users, schemes } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 
+function generateApplicationNumber(): string {
+  const timestamp = Date.now();
+  const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+  return `APP${timestamp}${random}`;
+}
+
 export async function GET(request: Request) {
   try {
     const user = await db.select().from(users).limit(1);
@@ -61,7 +67,8 @@ export async function POST(request: Request) {
       .values({
         userId: user[0].id,
         schemeId,
-        status: status || 'Not Started',
+        applicationNumber: generateApplicationNumber(),
+        status: status || 'submitted',
       })
       .returning();
 
